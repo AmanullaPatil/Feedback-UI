@@ -6,6 +6,9 @@ import { useState } from 'react';
 import FeedBackStats from './components/FeedBackStats.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';
 import {v4 as uuidv4} from 'uuid';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import About from './components/Pages/About.jsx';
+import AboutLinkIcon from './components/AboutLinkIcon.jsx';
 
  function App(){
   const [feedback,setFeedBack]=useState(FeedBackData)
@@ -21,16 +24,23 @@ setFeedBack([newFeedback,...feedback])
   }
   // console.log(feedback)
   return(
-    <>
+    <BrowserRouter>
     <Header />
-
-    <div className='container'>
-    <FeedbackForm handleAdd={addFeedback}/>
+     <div className='container'>
+      <Routes>
+        <Route path='/'element={
+          <>
+        <FeedbackForm handleAdd={addFeedback}/>
       <FeedBackStats feedback ={feedback}/>
        <FeedBackList feedback={feedback} handleDelete={deleteFeedback}/>
-   
+       <AboutLinkIcon/>
+       </>}></Route>
+       <Route path='/About' element={<About/>}/>
+    
+       </Routes>
+      
        </div>
-    </>
+       </BrowserRouter>
   )
  };
  export default App;
